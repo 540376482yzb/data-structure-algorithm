@@ -119,151 +119,152 @@ class LinkedList {
   }
 }
 
-function display(linkedlist) {
-  // console.log(JSON.stringify(linkedlist, null, 4))
-  let currNode = linkedlist.head
-  let str = `${currNode.value}`
-  currNode = currNode.next
-  while (currNode !== null) {
-    str += `, ${currNode.value}`
-    currNode = currNode.next
-  }
-  console.log(str)
-}
+module.exports = LinkedList
+// function display(linkedlist) {
+//   // console.log(JSON.stringify(linkedlist, null, 4))
+//   let currNode = linkedlist.head
+//   let str = `${currNode.value}`
+//   currNode = currNode.next
+//   while (currNode !== null) {
+//     str += `, ${currNode.value}`
+//     currNode = currNode.next
+//   }
+//   console.log(str)
+// }
 
-function getSize(linkedList) {
-  let theHead = linkedList.head
-  if (!theHead) {
-    return 0
-  }
-  let size = 1
-  while (theHead.next !== null) {
-    size++
-    if (theHead.next === null) {
-      return size
-    }
-    theHead = theHead.next
-  }
-  return size
-}
+// function getSize(linkedList) {
+//   let theHead = linkedList.head
+//   if (!theHead) {
+//     return 0
+//   }
+//   let size = 1
+//   while (theHead.next !== null) {
+//     size++
+//     if (theHead.next === null) {
+//       return size
+//     }
+//     theHead = theHead.next
+//   }
+//   return size
+// }
 
-function isEmpty(linkedList) {
-  return !linkedList.head ? true : false
-}
+// function isEmpty(linkedList) {
+//   return !linkedList.head ? true : false
+// }
 
-function findPrevNode(linkedList, value) {
-  let currNode = linkedList.head
-  let prevNode = linkedList.head
-  // no prevNode on the head node
-  if (currNode.value === value) {
-    return null
-  }
-  while (currNode.value !== value) {
-    if (currNode.next === null) {
-      return null
-    }
-    prevNode = currNode
-    currNode = currNode.next
-  }
-  return prevNode
-}
+// function findPrevNode(linkedList, value) {
+//   let currNode = linkedList.head
+//   let prevNode = linkedList.head
+//   // no prevNode on the head node
+//   if (currNode.value === value) {
+//     return null
+//   }
+//   while (currNode.value !== value) {
+//     if (currNode.next === null) {
+//       return null
+//     }
+//     prevNode = currNode
+//     currNode = currNode.next
+//   }
+//   return prevNode
+// }
 
-function findLastNode(linkedlist) {
-  let currNode = linkedlist.head
-  //check empty node
-  if (!currNode) {
-    return null
-  }
-  while (currNode.next !== null) {
-    currNode = currNode.next
-  }
-  return currNode
-}
+// function findLastNode(linkedlist) {
+//   let currNode = linkedlist.head
+//   //check empty node
+//   if (!currNode) {
+//     return null
+//   }
+//   while (currNode.next !== null) {
+//     currNode = currNode.next
+//   }
+//   return currNode
+// }
 
-function reverseList(linkedList) {
-  let currNode = linkedList.head
-  let tempNode = null
-  while(currNode !== null){
-    // tempNode = currNode.next
-    let saveNode = currNode.next
-    currNode.next = tempNode
-    tempNode = currNode
-    currNode = saveNode
-    // tempNode.next = currNode
-  }
-  linkedList.head = tempNode
-  return linkedList
-}
+// function reverseList(linkedList) {
+//   let currNode = linkedList.head
+//   let tempNode = null
+//   while(currNode !== null){
+//     // tempNode = currNode.next
+//     let saveNode = currNode.next
+//     currNode.next = tempNode
+//     tempNode = currNode
+//     currNode = saveNode
+//     // tempNode.next = currNode
+//   }
+//   linkedList.head = tempNode
+//   return linkedList
+// }
 
-// O(n)
-function thirdFromTheEnd(linkedList) {
-  let last = findLastNode(linkedList)
-  let count = 1
-  while (count < 3) {
-    last = findPrevNode(linkedList, last.value)
-    count++
-  }
-  return last.value
-}
+// // O(n)
+// function thirdFromTheEnd(linkedList) {
+//   let last = findLastNode(linkedList)
+//   let count = 1
+//   while (count < 3) {
+//     last = findPrevNode(linkedList, last.value)
+//     count++
+//   }
+//   return last.value
+// }
 
-function middleList(linkedList) {
-  if (!linkedList.head) return null
-  let nextNode = linkedList.head
-  let lastNode = findLastNode(linkedList)
-  while (nextNode.next !== null) {
-    if (nextNode.value === lastNode.value) {
-      return nextNode.value
-    }
-    if (nextNode.next.value === lastNode.value) {
-      return `${nextNode.value} - ${lastNode.value}`
-    }
-    nextNode = nextNode.next
-    lastNode = findPrevNode(linkedList, lastNode.value)
-  }
-}
+// function middleList(linkedList) {
+//   if (!linkedList.head) return null
+//   let nextNode = linkedList.head
+//   let lastNode = findLastNode(linkedList)
+//   while (nextNode.next !== null) {
+//     if (nextNode.value === lastNode.value) {
+//       return nextNode.value
+//     }
+//     if (nextNode.next.value === lastNode.value) {
+//       return `${nextNode.value} - ${lastNode.value}`
+//     }
+//     nextNode = nextNode.next
+//     lastNode = findPrevNode(linkedList, lastNode.value)
+//   }
+// }
 
-function checkCycleList(linkedList) {
-  let currNode = linkedList.head
-  let headValue = currNode.value
-  let history = {}
-  while (true) {
-    if (currNode.next === null) {
-      return false
-    }
-    if (Object.keys(history).includes(currNode.value)) {
-      return true
-    }
-    history[currNode.value] = currNode.value
-    currNode = currNode.next
-  }
-}
-function main() {
-  const sll = new LinkedList()
-  sll.insertFirst('Appolo')
-  sll.insertLast('Boomer')
-  sll.insertLast('Helo')
-  sll.insertLast('Husky')
-  sll.insertLast('Starbuck')
-  sll.insertLast('Tauhida')
-  sll.insertBefore('Athena', 'Boomer')
-  sll.insertAfter('Hotdog', 'Helo')
+// function checkCycleList(linkedList) {
+//   let currNode = linkedList.head
+//   let headValue = currNode.value
+//   let history = {}
+//   while (true) {
+//     if (currNode.next === null) {
+//       return false
+//     }
+//     if (Object.keys(history).includes(currNode.value)) {
+//       return true
+//     }
+//     history[currNode.value] = currNode.value
+//     currNode = currNode.next
+//   }
+// }
+// function main() {
+//   const sll = new LinkedList()
+//   sll.insertFirst('Appolo')
+//   sll.insertLast('Boomer')
+//   sll.insertLast('Helo')
+//   sll.insertLast('Husky')
+//   sll.insertLast('Starbuck')
+//   sll.insertLast('Tauhida')
+//   sll.insertBefore('Athena', 'Boomer')
+//   sll.insertAfter('Hotdog', 'Helo')
 
-  const cycleLL = new LinkedList()
-  cycleLL.insertFirst('Appolo')
-  cycleLL.insertLast('Boomer')
-  cycleLL.insertLast('Helo')
-  findLastNode(cycleLL).next = cycleLL.head
-  console.log(checkCycleList(cycleLL))
+//   const cycleLL = new LinkedList()
+//   cycleLL.insertFirst('Appolo')
+//   cycleLL.insertLast('Boomer')
+//   cycleLL.insertLast('Helo')
+//   findLastNode(cycleLL).next = cycleLL.head
+//   console.log(checkCycleList(cycleLL))
 
-  // console.log(findLastNode(cycleLL))
-  // display(sll)
-  // console.log(middleList(sll))
-  // console.log(thirdFromTheEnd(sll))
-  // display(reverseList(sll))
-  // console.log(getSize(sll))
-  // console.log(findPrevNode(sll, 'Athena'))
-  // console.log(findLastNode(sll))
-  // console.log(isEmpty(sll))
-}
+//   // console.log(findLastNode(cycleLL))
+//   // display(sll)
+//   // console.log(middleList(sll))
+//   // console.log(thirdFromTheEnd(sll))
+//   // display(reverseList(sll))
+//   // console.log(getSize(sll))
+//   // console.log(findPrevNode(sll, 'Athena'))
+//   // console.log(findLastNode(sll))
+//   // console.log(isEmpty(sll))
+// }
 
-main()
+// main()
